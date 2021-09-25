@@ -1,0 +1,22 @@
+{
+  "name": "zwave-prometheus-exporter",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ilshidur/zwave-prometheus-exporter.git"
+  },
+  "author": "Ilshidur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ilshidur/zwave-prometheus-exporter/issues"
+  },
+  "homepage": "https://github.com/Ilshidur/zwave-prometheus-exporter#readme",
+  "dependencies": {
+    "zwave-js": "8.3.1"
+  }
+}
