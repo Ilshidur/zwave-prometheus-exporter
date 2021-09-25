@@ -1,5 +1,18 @@
 # ⚡ zwave-prometheus-exporter
 
+![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)
+
+[![npm version][version-badge]][version-url]
+[![Known Vulnerabilities][vulnerabilities-badge]][vulnerabilities-url]
+[![dependency status][dependency-badge]][dependency-url]
+[![devdependency status][devdependency-badge]][devdependency-url]
+[![Code Climate][maintainability-badge]][maintainability-url]
+[![downloads][downloads-badge]][downloads-url]
+
+[![NPM][npm-stats-badge]][npm-stats-url]
+
+TODO: Description.
+
 ## ⚡ Usage
 
 ## ⚡ Installation
