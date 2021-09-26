@@ -11,9 +11,16 @@
 
 [![NPM][npm-stats-badge]][npm-stats-url]
 
-TODO: Description.
+Listens to Z-Wave nodes and exports Prometheus metrics.
 
 ## ⚡ Usage
+
+```bash
+zwave-prometheus-exporter [serial file] [metrics port]
+```
+
+* `[serial file]` : the path of the virtual serial port, defaults to `/dev/ttyUSB0`.
+* `[metrics port]` : the port on which the Prometheus metrics will be exposed, defaults to `9850`.
 
 ## ⚡ Installation
 
@@ -31,6 +38,10 @@ git clone https://github.com/Ilshidur/zwave-prometheus-exporter.git
 npm ci
 node scripts/run.js
 ```
+
+## ⚡ TODO
+
+* Process to securely add a node into the Z-Wave network.
 
 <hr/>
 
