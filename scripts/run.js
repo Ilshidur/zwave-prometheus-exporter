@@ -1,10 +1,9 @@
 const http = require('http');
 const path = require('path');
-const { Driver, InclusionStrategy } = require('zwave-js');
+const { Driver } = require('zwave-js');
 
 const PrometheusMetric = require('../metric');
 
-const package = require('../package.json');
 const keys = require('../keys.json');
 const monitoredMetrics = require('../metrics.json');
 
@@ -14,7 +13,7 @@ const [,, serialPortPath = '/dev/ttyUSB0', port = 9850] = process.argv;
 
 const driver = new Driver(serialPortPath, {
   storage: {
-    cacheDir: path.resolve(__dirname, 'cache'),
+    cacheDir: path.resolve(__dirname, '..', 'cache'),
   },
   securityKeys: {
     S2_Unauthenticated: Buffer.from(keys.s2.unauthenticated, 'hex'),
@@ -24,8 +23,8 @@ const driver = new Driver(serialPortPath, {
     S0_Legacy: Buffer.from(keys.s0.legacy, 'hex'),
   },
   logConfig: {
-    enable: true,
-    level: 'info',
+    enable: false,
+    level: 'error',
   },
 });
 
@@ -35,29 +34,7 @@ driver.on('error', (err) => {
 
 driver.once('driver ready', () => {
   driver.controller.nodes.forEach(async (node) => {
-    node.once('ready', async () => {
-      console.log(`[#${node.id}] Node ready. Name : #${node.name || '<NO NAME>'}.`);
-
-      if (!node.commandClasses.Basic.isSupported()) {
-        console.log(`[#${node.id}] Basic CC API not supported.`);
-        return;
-      }
-      // 'Qubino Smart Plug 16A'
-      try {
-        // console.log('Value', await node.getValue({
-        //   commandClass: 0x32,
-        //   property: 'value',
-        //   propertyKey: 66049,
-        // }));
-        console.log('test', await node.getDefinedValueIDs());
-      } catch (err) {
-        console.error(err);
-      }
-    });
-
     node.on('value updated', (_, value) => {
-      // console.log(`#${node.id} value updated`, value);
-
       const matchingMetric = monitoredMetrics
         .find((metricToMonitor) =>
           Number(metricToMonitor.commandClass) === value.commandClass &&
@@ -68,49 +45,13 @@ driver.once('driver ready', () => {
         prometheusMetrics[metric.hash] = metric;
       }
     });
-
-    // try {
-    //   await driver.controller.beginInclusion({
-    //     strategy: InclusionStrategy.Default,
-    //     userCallbacks: {
-    //       grantSecurityClasses(requested) {
-    //         console.log(requested);
-    //         // Show a dialog that asks the user which security classes to grant
-    //         // Return a Promise that resolves to the chosen security classes when confirmed
-    //         //
-    //         // YOUR IMPLEMENTATION HERE
-    //       },
-    //       validateDSKAndEnterPIN(dsk) {
-    //         console.log(dsk);
-    //         // Show a dialog that asks the user to validate the DSK and enter the device PIN
-    //         // Return a Promise that resolves to the entered PIN when confirmed
-    //         //
-    //         // YOUR IMPLEMENTATION HERE
-    //       },
-    //       abort() {
-    //         console.log('Abort');
-    //         // Hide the open dialog, notify user that the process was aborted
-    //         //
-    //         // YOUR IMPLEMENTATION HERE
-    //       },
-    //     },
-    //   });
-    // } catch (err) {
-    //   console.error(err);
-    // }
-  });
-
-  driver.controller.once('node added', (node, { lowSecurity }) => {
-    console.log(`[#${node.id}] Added node. Secure : ${lowSecurity}.`);
   });
 });
 
 (async () => {
   try {
-    // TODO: Enable once the project is finished.
-    // driver.enableStatistics({ applicationName: package.name, applicationVersion: package.version })
     await driver.start();
-    console.log('Z wave driver started.');
+    console.log('Z-Wave driver started.');
   } catch (err) {
     console.error(err);
     process.exit(1);
