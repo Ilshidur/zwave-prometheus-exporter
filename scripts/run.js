@@ -17,7 +17,7 @@ const options = program
   .option('-k, --keys <keys path>', 'the keys file path', 'keys.json')
   .option('-m, --metrics <metrics path>', 'the metrics file path', 'metrics.json')
   .option('-i, --input <input path>', 'the serial port file path', '/dev/ttyUSB0')
-  .option('-p --port <port>', 'the port where the prometheus metrics will be exposed', 9850)
+  .option('-p, --port <port>', 'the port where the prometheus metrics will be exposed', 9850)
   .parse(process.argv)
   .opts();
 
