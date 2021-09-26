@@ -5,14 +5,14 @@ const { Driver } = require('zwave-js');
 const PrometheusMetric = require('../metric');
 
 module.exports = (options) => {
-  const keys = require('../keys.json');
-  const monitoredMetrics = require('../metrics.json');
+  const keys = require(path.resolve(process.cwd(), 'keys.json'));
+  const monitoredMetrics = require(path.resolve(process.cwd(), 'metrics.json'));
 
   const prometheusMetrics = {};
 
   const driver = new Driver(options.input, {
     storage: {
-      cacheDir: path.resolve(__dirname, '..', 'cache'),
+      cacheDir: path.resolve(path.resolve(process.cwd(), 'cache')),
     },
     securityKeys: {
       S2_Unauthenticated: Buffer.from(keys.s2.unauthenticated, 'hex'),
@@ -66,10 +66,15 @@ module.exports = (options) => {
       res.end(Object.values(prometheusMetrics).map(metric => metric.toString()).sort().join('\n'));
     });
 
+    let shuttingDown = false;
     process.on('SIGINT', async () => {
-      console.log('Destroying...');
-      server.close();
-      await driver.destroy();
+      if (!shuttingDown) {
+        console.log('Destroying...');
+        server.close();
+        await driver.destroy();
+      } else {
+        process.exit(1);
+      }
     });
 
     server.listen(options.port);
