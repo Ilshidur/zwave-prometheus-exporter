@@ -27,7 +27,7 @@ zwave-prometheus-exporter
 ```bash
 git clone https://github.com/Ilshidur/zwave-prometheus-exporter.git
 npm ci
-node scripts/run.js
+node cli.js
 ```
 
 ## ⚡ Usage

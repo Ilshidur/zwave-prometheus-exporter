@@ -12,7 +12,7 @@
         "zwave-js": "8.3.1"
       },
       "bin": {
-        "zwave-prometheus-exporter": "scripts/run.js"
+        "zwave-prometheus-exporter": "cli.js"
       }
     },
     "node_modules/@alcalzone/jsonl-db": {

@@ -2,9 +2,9 @@
   "name": "zwave-prometheus-exporter",
   "version": "0.0.3",
   "description": "",
-  "main": "scripts/run.js",
+  "main": "cli.js",
   "bin": {
-    "zwave-prometheus-exporter": "scripts/run.js"
+    "zwave-prometheus-exporter": "cli.js"
   },
   "preferGlobal": true,
   "scripts": {
@@ -31,7 +31,8 @@
     "zwave-js": "8.3.1"
   },
   "files": [
-    "scripts",
+    "commands",
+    "cli.js",
     "crypto.js",
     "metric.js"
   ]
