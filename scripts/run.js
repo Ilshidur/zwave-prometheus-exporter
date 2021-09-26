@@ -1,19 +1,32 @@
 #!/usr/bin/env node
 
+const { Command } = require('commander');
 const http = require('http');
 const path = require('path');
 const { Driver } = require('zwave-js');
 
 const PrometheusMetric = require('../metric');
 
+const package = require('../package.json');
+
+const program = new Command();
+const options = program
+  .version(package.version)
+  .name(package.name)
+  .usage('')
+  .option('-k, --keys <keys path>', 'the keys file path', 'keys.json')
+  .option('-m, --metrics <metrics path>', 'the metrics file path', 'metrics.json')
+  .option('-i, --input <input path>', 'the serial port file path', '/dev/ttyUSB0')
+  .option('-p --port <port>', 'the port where the prometheus metrics will be exposed', 9850)
+  .parse(process.argv)
+  .opts();
+
 const keys = require('../keys.json');
 const monitoredMetrics = require('../metrics.json');
 
 const prometheusMetrics = {};
 
-const [,, serialPortPath = '/dev/ttyUSB0', port = 9850] = process.argv;
-
-const driver = new Driver(serialPortPath, {
+const driver = new Driver(options.input, {
   storage: {
     cacheDir: path.resolve(__dirname, '..', 'cache'),
   },
@@ -75,6 +88,6 @@ driver.once('driver ready', () => {
     await driver.destroy();
   });
 
-  server.listen(port);
-  console.log(`Listening on port ${port}...`);
+  server.listen(options.port);
+  console.log(`Listening on port ${options.port}...`);
 })();
