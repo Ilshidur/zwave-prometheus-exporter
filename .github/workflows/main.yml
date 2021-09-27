@@ -34,5 +34,5 @@ jobs:
       uses: peter-evans/dockerhub-description@v2
       with:
         username: ilshidur
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
         repository: ilshidur/zwave-prometheus-exporter
