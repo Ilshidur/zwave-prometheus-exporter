@@ -11,11 +11,15 @@
 
 [![NPM][npm-stats-badge]][npm-stats-url]
 
+[![dockeri.co](https://dockeri.co/image/ilshidur/zwave-prometheus-exporter)](https://hub.docker.com/r/ilshidur/zwave-prometheus-exporter)
+
 Listens to Z-Wave nodes and exports Prometheus metrics.
 
 ## ⚡ Installation
 
-### As a global module
+### As a global npm module
+
+**Node.js required.**
 
 ```bash
 npm i -g zwave-prometheus-exporter
@@ -23,6 +27,8 @@ zwave-prometheus-exporter
 ```
 
 ### By cloning the git project
+
+**Node.js required.**
 
 ```bash
 git clone https://github.com/Ilshidur/zwave-prometheus-exporter.git
