@@ -30,9 +30,3 @@ jobs:
       with:
         push: true
         tags: ilshidur/zwave-prometheus-exporter:latest
-    - name: Update Docker repo description.
-      uses: peter-evans/dockerhub-description@v2
-      with:
-        username: ilshidur
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        repository: ilshidur/zwave-prometheus-exporter
