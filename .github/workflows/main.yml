@@ -34,4 +34,4 @@ jobs:
       uses: docker/build-push-action@v2.7.0
       with:
         push: true
-        tags: ilshidur/zwave-prometheus-exporter
+        tags: ilshidur/zwave-prometheus-exporter:latest,ilshidur/zwave-prometheus-exporter:${{ env.RELEASE_VERSION }}
