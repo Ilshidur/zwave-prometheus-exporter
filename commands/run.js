@@ -69,10 +69,12 @@ module.exports = (options) => {
     let shuttingDown = false;
     process.on('SIGINT', async () => {
       if (!shuttingDown) {
+        shuttingDown = true;
         console.log('Destroying...');
         server.close();
         await driver.destroy();
       } else {
+        console.log('Killing...');
         process.exit(1);
       }
     });
