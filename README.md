@@ -17,6 +17,19 @@ Listens to Z-Wave nodes and exports Prometheus metrics.
 
 ## ⚡ Installation
 
+### Using Docker
+
+```bash
+docker run \
+  -p 9850:9850 \
+  -v $(pwd)/metrics.json:/home/app/metrics.json \
+  -v $(pwd)/keys.json:/home/app/keys.json \
+  --device=/dev/ttyUSB0:/dev/ttyUSB0 \
+  --name zwave-prometheus-exporter \
+  --rm \
+  ilshidur/zwave-prometheus-exporter
+```
+
 ### As a global npm module
 
 **Node.js required.**
