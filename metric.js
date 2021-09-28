@@ -12,6 +12,6 @@ module.exports = class PrometheusMetric {
   }
 
   toString() {
-    return `${METRICS_PREFIX}${this.name.toLowerCase()}{node=${this.nodeId}} ${this.value}`;
+    return `${METRICS_PREFIX}${this.name.toLowerCase()}{node="${this.nodeId}"} ${this.value}`;
   }
 };
