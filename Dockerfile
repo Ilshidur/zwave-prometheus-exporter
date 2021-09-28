@@ -13,4 +13,6 @@ RUN npm ci --production
 
 COPY . .
 
+EXPOSE 9850
+
 CMD node cli.js
