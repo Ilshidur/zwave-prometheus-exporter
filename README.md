@@ -59,7 +59,7 @@ Options:
   -k, --keys <keys path>        the keys file path (default: "keys.json")
   -m, --metrics <metrics path>  the metrics file path (default: "metrics.json")
   -i, --input <input path>      the serial port file path (default: "/dev/ttyUSB0")
-  -p, --port <port>              the port where the prometheus metrics will be exposed (default: 9850)
+  -p, --port <port>             the port where the prometheus metrics will be exposed (default: 9850)
   -h, --help                    display help for command
 ```
 
