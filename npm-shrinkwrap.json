@@ -5,10 +5,11 @@
   "requires": true,
   "packages": {
     "": {
-      "version": "0.0.2",
+      "name": "zwave-prometheus-exporter",
+      "version": "0.0.10",
       "license": "MIT",
       "dependencies": {
-        "commander": "8.2.0",
+        "commander": "8.3.0",
         "zwave-js": "8.3.1"
       },
       "bin": {
@@ -657,9 +658,9 @@
       }
     },
     "node_modules/commander": {
-      "version": "8.2.0",
-      "resolved": "https://registry.npmjs.org/commander/-/commander-8.2.0.tgz",
-      "integrity": "sha512-LLKxDvHeL91/8MIyTAD5BFMNtoIwztGPMiM/7Bl8rIPmHCZXRxmSWr91h57dpOpnQ6jIUqEWdXE/uBYMfiVZDA==",
+      "version": "8.3.0",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz",
+      "integrity": "sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==",
       "engines": {
         "node": ">= 12"
       }
@@ -1007,7 +1008,6 @@
       "resolved": "https://registry.npmjs.org/jsonfile/-/jsonfile-6.1.0.tgz",
       "integrity": "sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==",
       "dependencies": {
-        "graceful-fs": "^4.1.6",
         "universalify": "^2.0.0"
       },
       "optionalDependencies": {
@@ -2162,9 +2162,9 @@
       }
     },
     "commander": {
-      "version": "8.2.0",
-      "resolved": "https://registry.npmjs.org/commander/-/commander-8.2.0.tgz",
-      "integrity": "sha512-LLKxDvHeL91/8MIyTAD5BFMNtoIwztGPMiM/7Bl8rIPmHCZXRxmSWr91h57dpOpnQ6jIUqEWdXE/uBYMfiVZDA=="
+      "version": "8.3.0",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz",
+      "integrity": "sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww=="
     },
     "console-control-strings": {
       "version": "1.1.0",
