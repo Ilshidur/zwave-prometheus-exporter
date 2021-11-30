@@ -1,34 +1,46 @@
+const fs = require('fs');
 const http = require('http');
 const path = require('path');
-const { Driver } = require('zwave-js');
 
+const { createDriver } = require('../driver');
 const PrometheusMetric = require('../metric');
 
-module.exports = (options) => {
-  const keys = require(path.resolve(process.cwd(), 'keys.json'));
-  const monitoredMetrics = require(path.resolve(process.cwd(), 'metrics.json'));
+module.exports = (port, commandOptions, command) => {
+  const options = { ...command.parent.opts(), ...commandOptions };
 
+  // const monitoredMetrics = require(path.resolve(process.cwd(), options.metrics));
+  const monitoredMetricsPath = path.resolve(process.cwd(), options.metrics);
+  if (!fs.existsSync(monitoredMetricsPath)) {
+    console.error(`Metrics file ${monitoredMetricsPath} doesn't exist.`);
+    process.exit(1);
+  }
+
+  let rawMonitoredMetrics;
+  try {
+    rawMonitoredMetrics = fs.readFileSync(monitoredMetricsPath);
+  } catch (err) {
+    console.error(`Could not open the file ${monitoredMetricsPath} :`);
+    console.error(err.message);
+    process.exit(1);
+  }
+
+  let monitoredMetrics;
+  try {
+    monitoredMetrics = JSON.parse(rawMonitoredMetrics);
+  } catch (err) {
+    console.error(`Could not parse the file ${monitoredMetricsPath} :`);
+    console.error(err.message);
+    process.exit(1);
+  }
+
+  const driver = createDriver(options.input, options.keys, { debug: options.debug });
   const prometheusMetrics = {};
-
-  const driver = new Driver(options.input, {
-    storage: {
-      cacheDir: path.resolve(path.resolve(process.cwd(), 'cache')),
-    },
-    securityKeys: {
-      S2_Unauthenticated: Buffer.from(keys.s2.unauthenticated, 'hex'),
-      S2_Authenticated: Buffer.from(keys.s2.authenticated, 'hex'),
-      S2_AccessControl: Buffer.from(keys.s2.accessControl, 'hex'),
-      // S0_Legacy replaces the old networkKey option.
-      S0_Legacy: Buffer.from(keys.s0.legacy, 'hex'),
-    },
-    logConfig: {
-      enable: false,
-      level: 'error',
-    },
-  });
 
   driver.on('error', (err) => {
     console.error(err);
+
+    // TODO: If err.code === 5 || err.message.includes('The serial port close unexpectedly!')
+    // Prevent exporting.
   });
 
   driver.once('driver ready', () => {
@@ -79,7 +91,7 @@ module.exports = (options) => {
       }
     });
 
-    server.listen(options.port);
-    console.log(`Listening on port ${options.port}...`);
+    server.listen(port);
+    console.log(`Listening on port ${port}...`);
   })();
 };

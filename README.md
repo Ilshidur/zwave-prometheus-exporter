@@ -63,6 +63,11 @@ Options:
   -h, --help                    display help for command
 ```
 
+### Monitor a Z-Wave node value
+
+1. Run `zwave-prometheus-exporter`
+2. 
+
 ## ⚡ Configuration files
 
 The CLI needs 2 files to run : `metrics.json` and `keys.json`. If no path is provided, the CLI will try to load `zwave-prometheus-exporter/metrics.json` and `zwave-prometheus-exporter/keys.json`.
