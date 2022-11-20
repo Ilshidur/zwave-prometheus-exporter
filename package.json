@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/Ilshidur/zwave-prometheus-exporter#readme",
   "dependencies": {
-    "commander": "8.2.0",
+    "commander": "9.4.1",
     "zwave-js": "8.3.1"
   },
   "files": [
